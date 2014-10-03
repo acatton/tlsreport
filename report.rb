@@ -18,13 +18,17 @@ end
 host = ARGV[0]
 port = ARGV[1]
 
-# XXX-Antoine: OpenSSL::Cipher.ciphers doesn't give all of them.
-# Don't ask me why...
-ctx = OpenSSL::SSL::SSLContext.new
-ctx.ciphers = 'ALL'
-ciphers_list = ctx.ciphers.map do |cipher|
-        cipher[0] # [name, version, bits, algo]
+def get_ciphers()
+    # XXX-Antoine: OpenSSL::Cipher.ciphers doesn't give all of them.
+    # Don't ask me why...
+    ctx = OpenSSL::SSL::SSLContext.new
+    ctx.ciphers = 'ALL'
+    return ctx.ciphers.map do |cipher|
+            cipher[0] # [name, version, bits, algo]
     end
+end
+
+ciphers_list = get_ciphers
 ciphers = []
 
 loop do
