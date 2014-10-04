@@ -5,6 +5,7 @@
 require 'openssl'
 require 'socket'
 require 'set'
+require 'logger'
 
 methods_list = [:SSLv2, :SSLv3, :TLSv1, :TLSv1_1, :TLSv1_2]
 all_methods = Set.new methods_list
@@ -16,9 +17,11 @@ methods_names = {
     :TLSv1_2 => "TLS version 1.2",
 }
 
+$logger = Logger.new STDERR
+
 def usage(error)
-    STDERR.puts "Error: #{error}"
-    STDERR.puts "Usage: #{$0} hostname port [delay]"
+    $logger.fatal error
+    $logger.info "Usage: #{$0} hostname port [delay]"
     exit 127
 end
 
@@ -76,10 +79,10 @@ available_methods = Set.new OpenSSL::SSL::SSLContext::METHODS
 methods = available_methods & all_methods
 
 if methods < all_methods
-    STDERR.puts "Warning: Your OpenSSL version and/or your ruby version doesn't support all TLS versions"
+    $logger.warn "Your OpenSSL version and/or your ruby version doesn't support all TLS versions"
     unsupported_methods = all_methods - methods
     unsupported_methods.each do |item|
-        STDERR.puts "Warning: #{methods_names[item]} not supported."
+        $logger.warn "#{methods_names[item]} not supported."
     end
 end
 
