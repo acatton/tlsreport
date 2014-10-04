@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # encoding: UTF-8
 # (C) 2014, Antoine Catton <devel@antoine.catton.fr> (See license file)
 
