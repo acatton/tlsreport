@@ -18,7 +18,7 @@ methods_names = {
 
 def usage(error)
     STDERR.puts "Error: #{error}"
-    STDERR.puts "Usage: #{$0} hostname port"
+    STDERR.puts "Usage: #{$0} hostname port [delay]"
     exit 127
 end
 
@@ -28,6 +28,7 @@ end
 
 host = ARGV[0]
 port = ARGV[1]
+$delay = ARGV[2]
 
 def get_all_ciphers(method)
     # XXX-Antoine: OpenSSL::Cipher.ciphers doesn't give all of them.
@@ -61,6 +62,10 @@ def get_ciphers(method, host, port)
             return ciphers
         ensure
             sock.close
+        end
+
+        unless $delay.nil?
+            sleep $delay.to_i
         end
 
     end
