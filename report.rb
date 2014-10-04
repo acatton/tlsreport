@@ -106,3 +106,13 @@ methods_list.each do |method|
         end
     end
 end
+
+puts ""
+puts "Uniq ciphers (sorted by name):"
+puts "=============================="
+
+
+uniq_ciphers = results.values.map { |value| Set.new value }.reduce :+
+uniq_ciphers.to_a.sort.each do |cipher|
+    puts cipher
+end
