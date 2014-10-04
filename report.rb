@@ -59,7 +59,7 @@ def get_ciphers(method, host, port)
             ssock.connect
 
             cipher_name = ssock.cipher[0] # [name, version, bits, algo]
-            ciphers.push cipher_name
+            ciphers << cipher_name
             ciphers_list.delete cipher_name
         rescue OpenSSL::SSL::SSLError, Errno::ECONNRESET
             return ciphers
