@@ -58,7 +58,7 @@ def get_ciphers(method, host, port)
             cipher_name = ssock.cipher[0] # [name, version, bits, algo]
             ciphers.push cipher_name
             ciphers_list.delete cipher_name
-        rescue OpenSSL::SSL::SSLError
+        rescue OpenSSL::SSL::SSLError, Errno::ECONNRESET
             return ciphers
         ensure
             sock.close
