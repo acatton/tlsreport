@@ -8,15 +8,16 @@ Give a list of ciphers supported by a server.
 
 This is the pattern:
 
-    $ ./report.rb hostname port [delay]
+    $ ./report [--delay N] hostname [port]
 
-The delay is in seconds.
+The delay is in seconds and defaults to zero.
+The port defaults to https.
 
 
 For example:
 
-    $ ./report.rb example.com 443 2
-    $ ./report.rb localhost https
+    $ ./report --delay 2 example.com 443
+    $ ./report localhost imaps
 
 ## License
 
