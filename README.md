@@ -2,7 +2,7 @@
 
 Give a list of ciphers supported by a server.
 
-(Basically doing what ssllabs.com do, but locally)
+(Basically doing what ssllabs.com does, but locally)
 
 ## How to use
 
