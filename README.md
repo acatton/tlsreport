@@ -21,7 +21,7 @@ For example:
 
 ## License
 
-This is licensed under the European Union Public License
+This is licensed under the European Union Public License version 1.1
 
 ## FAQ
 
