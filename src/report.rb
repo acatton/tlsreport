@@ -73,11 +73,11 @@ module TLSReport
 
                 available_methods = openssl_methods & tlsreport_methods
 
-                if available_methods < tlsreport_methods
-                    TLSReport::TLS::Logger.instance.warn "Your OpenSSL version and/or your ruby version doesn't support all TLS versions"
-                    unsupported_methods = all_methods - methods
+                if available_methods.proper_subset? tlsreport_methods
+                    TLSReport::Logger.instance.warn "Your OpenSSL version and/or your ruby version doesn't support all TLS versions"
+                    unsupported_methods = tlsreport_methods.difference openssl_methods
                     unsupported_methods.each do |item|
-                        TLSReport::TLS::Logger.warn "#{methods_names[item]} not supported."
+                        TLSReport::Logger.instance.warn "#{METHODS_NAMES[item]} not supported."
                     end
                 end
 
